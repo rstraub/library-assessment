@@ -1,0 +1,27 @@
+HELP.md
+build/
+!**/src/main/**
+!**/src/test/**
+target
+logs/
+var/
+log_*
+venv
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### Linux ###
+.attach_pid*
+/var/log/applog/spring-boot/log
+/docker/log/fpx-edge-router-stub.log
+
+*.settings
+*.project
+*.vscode
+*.classpath
+bin/
