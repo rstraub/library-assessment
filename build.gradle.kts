@@ -1,6 +1,5 @@
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.4.20"
-    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
     application
 }
 
