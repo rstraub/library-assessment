@@ -1,7 +1,9 @@
 package nl.rstraub.library.assessment
 
-class Library {}
+class Library {
+    val inventory = emptyList<String>()
+}
 
 fun main() {
-    print("hello")
+    print(Library().inventory)
 }
