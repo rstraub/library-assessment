@@ -18,7 +18,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("nl.rstraub.kata.kotlin.args.ArgsKt")
+    mainClass.set("nl.rstraub.library.assessment.LibraryKt")
 }
 
 tasks.withType<Test> {
