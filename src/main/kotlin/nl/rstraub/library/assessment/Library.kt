@@ -5,7 +5,7 @@ class Library(vararg books: String) {
     val inventory
         get() = currentInventory.toList()
 
-    private val currentMembers = mutableSetOf<String>()
+    private val currentMembers = mutableSetOf<Member>()
     val members
         get() = currentMembers.toSet()
 
@@ -14,7 +14,7 @@ class Library(vararg books: String) {
     }
 
     infix fun addMember(member: String) {
-        currentMembers += member
+        currentMembers += Member(member)
     }
 }
 
