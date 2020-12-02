@@ -23,3 +23,9 @@ application {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
