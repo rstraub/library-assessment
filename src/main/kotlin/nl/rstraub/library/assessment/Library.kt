@@ -1,10 +1,12 @@
 package nl.rstraub.library.assessment
 
 class Library(vararg books: String) {
-    val inventory = books.toMutableList()
+    private val books = books.toMutableList()
+    val inventory
+        get() = books.toList()
 
     infix fun addBook(book: String) {
-        inventory += book
+        books += book
     }
 }
 
