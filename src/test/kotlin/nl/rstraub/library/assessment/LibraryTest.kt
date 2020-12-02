@@ -2,6 +2,8 @@ package nl.rstraub.library.assessment
 
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.collections.shouldContain
+import io.kotest.matchers.collections.shouldContainAll
+import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
 internal class LibraryTest : WordSpec({
@@ -17,6 +19,18 @@ internal class LibraryTest : WordSpec({
 
             result shouldContain "moby dick"
             result shouldContain "picture of dorian gray"
+        }
+    }
+
+    "addBook" should {
+        "add a book to the inventory" {
+            val library = Library("the iliad")
+
+            library addBook "the odyssey"
+            val result = library.inventory
+
+            result shouldHaveSize 2
+            result shouldContainAll listOf("the iliad", "the odyssey")
         }
     }
 })
