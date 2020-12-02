@@ -50,22 +50,24 @@ internal class LibraryTest : WordSpec({
     "addMember" should {
         "add a member to the library" {
             val library = Library()
+            val member = Member("homer")
 
-            library addMember "homer"
+            library addMember member
             val result = library.members
 
             result shouldHaveSize 1
-            result shouldContain Member("homer")
+            result shouldContain member
         }
 
         "not add a duplicate member to the library" {
             val library = Library()
+            val member = Member("oscar wilde")
 
-            library addMember "oscar wilde"
-            library addMember "oscar wilde"
+            library addMember member
+            library addMember member
             val result = library.members
 
-            result shouldContain Member("oscar wilde")
+            result shouldContain member
             result.shouldNotContainDuplicates()
         }
     }

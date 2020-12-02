@@ -13,8 +13,8 @@ class Library(vararg books: String) {
         currentInventory += book
     }
 
-    infix fun addMember(member: String) {
-        currentMembers += Member(member)
+    infix fun addMember(member: Member) {
+        currentMembers += member
     }
 }
 
