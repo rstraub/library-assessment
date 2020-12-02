@@ -5,6 +5,7 @@ import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldContainDuplicates
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.collections.shouldNotContainDuplicates
 import io.kotest.matchers.shouldBe
 
 internal class LibraryTest : WordSpec({
@@ -55,6 +56,17 @@ internal class LibraryTest : WordSpec({
 
             result shouldHaveSize 1
             result shouldContain "homer"
+        }
+
+        "not add a duplicate member to the library" {
+            val library = Library()
+
+            library addMember "oscar wilde"
+            library addMember "oscar wilde"
+            val result = library.members
+
+            result shouldContain "oscar wilde"
+            result.shouldNotContainDuplicates()
         }
     }
 })

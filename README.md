@@ -10,7 +10,7 @@ Your job is to implement a new library system. We will evaluate your solution in
 - [x] New books can be added to the inventory of the library
 - [x] The library can have multiple copies of a book in its inventory
 - [x] New members can be added to the library
-- [ ] A member should be unique within the library
+- [x] A member should be unique within the library
 - [ ] A member can tell which books are currently in his possession
 - [ ] A member can lend available books from the library
 - [ ] A member is allowed a maximum of seven loaned items at a time
