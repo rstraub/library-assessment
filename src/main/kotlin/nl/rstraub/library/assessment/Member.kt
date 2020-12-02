@@ -1,5 +1,5 @@
 package nl.rstraub.library.assessment
 
-class Member {
+class Member(val name: String) {
     val loanedBooks = emptyList<String>()
 }
