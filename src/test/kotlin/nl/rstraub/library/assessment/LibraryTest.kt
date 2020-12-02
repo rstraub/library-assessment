@@ -52,7 +52,7 @@ internal class LibraryTest : WordSpec({
             val library = Library()
             val member = Member("homer")
 
-            library addMember member
+            library add member
             val result = library.members
 
             result shouldHaveSize 1
@@ -63,8 +63,8 @@ internal class LibraryTest : WordSpec({
             val library = Library()
             val member = Member("oscar wilde")
 
-            library addMember member
-            library addMember member
+            library add member
+            library add member
             val result = library.members
 
             result shouldContain member
