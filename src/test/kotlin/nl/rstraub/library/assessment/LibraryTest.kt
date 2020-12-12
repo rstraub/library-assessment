@@ -1,5 +1,6 @@
 package nl.rstraub.library.assessment
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldContainAll
@@ -69,6 +70,30 @@ internal class LibraryTest : WordSpec({
 
             result shouldContain member
             result.shouldNotContainDuplicates()
+        }
+    }
+
+    "lend" should {
+        lateinit var member: Member
+        lateinit var library: Library
+        beforeEach {
+            library = Library("1984")
+            member = Member("george")
+        }
+
+        "should throw an exception if the book is not in the library" {
+            shouldThrow<IllegalArgumentException> {
+                library lend ("404" to member)
+            }.message
+                .shouldBe("Book '404' not in the library")
+        }
+
+        "should throw an exception if the member is not a member of the library" {
+
+        }
+
+        "should return true and add book to the member given valid load request" {
+
         }
     }
 })
