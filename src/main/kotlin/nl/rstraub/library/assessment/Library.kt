@@ -20,6 +20,7 @@ class Library(vararg books: String) {
     infix fun lend(loanRequest: LoanRequest) =
         loanIsAllowed(loanRequest)
             .also { removeBook(loanRequest.book) }
+            .also { loanRequest.member add loanRequest.book }
 
     private fun loanIsAllowed(loanRequest: LoanRequest) =
         bookIsAvailable(loanRequest.book) && isLibraryMember(loanRequest.member)

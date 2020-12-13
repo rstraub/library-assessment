@@ -1,7 +1,11 @@
 package nl.rstraub.library.assessment
 
 class Member(val name: String) {
-    val loanedBooks = emptyList<String>()
+    val loanedBooks = mutableListOf<String>()
+
+    infix fun add(book: String) {
+        loanedBooks += book
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
