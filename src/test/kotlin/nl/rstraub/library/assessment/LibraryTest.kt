@@ -74,10 +74,14 @@ internal class LibraryTest : WordSpec({
 
     "lend" should {
         lateinit var member: Member
+        lateinit var book: String
         lateinit var library: Library
+
         beforeEach {
-            library = Library("1984")
+            book = "1984"
+            library = Library(book)
             member = Member("george")
+            library add member
         }
 
         "should return false if the book is not in the library" {
@@ -85,11 +89,11 @@ internal class LibraryTest : WordSpec({
         }
 
         "should return false if the member is not a member of the library" {
-            library lend ("1984" to Member("gorge")) shouldBe false
+            library lend (book to Member("gorge")) shouldBe false
         }
 
         "should return true and add book to the member given valid load request" {
-
+            library lend (book to member) shouldBe true
         }
     }
 })
