@@ -98,10 +98,16 @@ internal class LibraryTest : WordSpec({
             library lend (book to member) shouldBe true
         }
 
-        "should remove the book from the library given valid load request" {
+        "should remove the book from the library given valid loan request" {
             library.inventory shouldContain book
             library lend (book to member)
             library.inventory shouldNotContain book
+        }
+
+        "should add the book to the member given a valid loan request" {
+            member.loanedBooks.shouldBeEmpty()
+            library lend (book to member)
+            member.loanedBooks shouldContain book
         }
     }
 })
