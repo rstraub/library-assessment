@@ -19,7 +19,7 @@ class Library(vararg books: String) {
 
     infix fun lend(loanRequest: LoanRequest) =
         loanIsAllowed(loanRequest)
-            .also { removeBook(loanRequest.book) }
+            .also { this -= loanRequest.book }
             .also { loanRequest.member add loanRequest.book }
 
     private fun loanIsAllowed(loanRequest: LoanRequest) =
@@ -29,7 +29,7 @@ class Library(vararg books: String) {
 
     private fun isLibraryMember(member: Member) = member in members
 
-    private fun removeBook(book: String) {
+    private operator fun minusAssign(book: String) {
         currentInventory -= book
     }
 }
