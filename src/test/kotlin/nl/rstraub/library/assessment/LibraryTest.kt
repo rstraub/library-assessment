@@ -54,7 +54,7 @@ internal class LibraryTest : WordSpec({
             val library = Library()
             val member = Member("homer")
 
-            library add member
+            library += member
             val result = library.members
 
             result shouldHaveSize 1
@@ -65,8 +65,8 @@ internal class LibraryTest : WordSpec({
             val library = Library()
             val member = Member("oscar wilde")
 
-            library add member
-            library add member
+            library += member
+            library += member
             val result = library.members
 
             result shouldContain member
@@ -83,7 +83,7 @@ internal class LibraryTest : WordSpec({
             book = "1984"
             library = Library(book)
             member = Member("george")
-            library add member
+            library += member
         }
 
         "should return false if the book is not in the library" {

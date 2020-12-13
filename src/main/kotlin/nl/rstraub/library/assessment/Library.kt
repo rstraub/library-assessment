@@ -13,7 +13,7 @@ class Library(vararg books: String) {
         currentInventory += book
     }
 
-    infix fun add(member: Member) {
+    operator fun plusAssign(member: Member) {
         currentMembers += member
     }
 
