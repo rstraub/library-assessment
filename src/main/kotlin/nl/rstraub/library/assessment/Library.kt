@@ -18,11 +18,7 @@ class Library(vararg books: String) {
     }
 
     infix fun lend(loanRequest: Pair<String, Member>): Boolean {
-        require(loanRequest.first in currentInventory) {
-           "Book '${loanRequest.first}' not in the library"
-        }
-
-        return true
+        return loanRequest.first in inventory
     }
 }
 

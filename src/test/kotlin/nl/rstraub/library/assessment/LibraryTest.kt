@@ -81,11 +81,8 @@ internal class LibraryTest : WordSpec({
             member = Member("george")
         }
 
-        "should throw an exception if the book is not in the library" {
-            shouldThrow<IllegalArgumentException> {
-                library lend ("404" to member)
-            }.message
-                .shouldBe("Book '404' not in the library")
+        "should return false if the book is not in the library" {
+            library lend ("404" to member) shouldBe false
         }
 
         "should throw an exception if the member is not a member of the library" {
