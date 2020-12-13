@@ -3,7 +3,7 @@ package nl.rstraub.library.assessment
 class Member(val name: String) {
     val loanedBooks = mutableListOf<String>()
 
-    infix fun add(book: String) {
+    operator fun plusAssign(book: String) {
         loanedBooks += book
     }
 
