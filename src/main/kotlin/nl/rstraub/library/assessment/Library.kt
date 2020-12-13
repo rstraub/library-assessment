@@ -9,7 +9,7 @@ class Library(vararg books: String) {
     val members
         get() = currentMembers.toSet()
 
-    infix fun add(book: String) {
+    operator fun plusAssign(book: String) {
         currentInventory += book
     }
 

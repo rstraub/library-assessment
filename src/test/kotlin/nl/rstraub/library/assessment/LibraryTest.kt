@@ -30,7 +30,7 @@ internal class LibraryTest : WordSpec({
         "add a book to the inventory" {
             val library = Library("the iliad")
 
-            library add "the odyssey"
+            library += "the odyssey"
             val result = library.inventory
 
             result shouldHaveSize 2
@@ -40,7 +40,7 @@ internal class LibraryTest : WordSpec({
         "add duplicate books to the inventory" {
             val library = Library("the iliad")
 
-            library add "the iliad"
+            library += "the iliad"
             val result = library.inventory
 
             result shouldHaveSize 2
