@@ -17,10 +17,9 @@ class Library(vararg books: String) {
         currentMembers += member
     }
 
-    infix fun lend(loanRequest: LoanRequest): Boolean {
-        return loanIsAllowed(loanRequest)
-            .also { currentInventory -= loanRequest.book }
-    }
+    infix fun lend(loanRequest: LoanRequest) =
+        loanIsAllowed(loanRequest)
+            .also { removeBook(loanRequest.book) }
 
     private fun loanIsAllowed(loanRequest: LoanRequest) =
         bookIsAvailable(loanRequest.book) && isLibraryMember(loanRequest.member)
@@ -28,6 +27,10 @@ class Library(vararg books: String) {
     private fun bookIsAvailable(book: String) = book in inventory
 
     private fun isLibraryMember(member: Member) = member in members
+
+    private fun removeBook(book: String) {
+        currentInventory -= book
+    }
 }
 
 fun main() {
