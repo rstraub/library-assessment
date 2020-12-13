@@ -18,12 +18,12 @@ class Library(vararg books: String) {
     }
 
     infix fun lend(loanRequest: Pair<String, Member>): Boolean {
-        val (book, member) = loanRequest
-        return loanIsAllowed(book, member)
+        val request = LoanRequest(loanRequest.first, loanRequest.second)
+        return loanIsAllowed(request)
     }
 
-    private fun loanIsAllowed(book: String, member: Member) =
-        bookIsAvailable(book) && isLibraryMember(member)
+    private fun loanIsAllowed(loanRequest: LoanRequest) =
+        bookIsAvailable(loanRequest.book) && isLibraryMember(loanRequest.member)
 
     private fun bookIsAvailable(book: String) = book in inventory
 
