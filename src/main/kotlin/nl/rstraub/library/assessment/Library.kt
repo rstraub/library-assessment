@@ -17,8 +17,14 @@ class Library(vararg books: String) {
         currentMembers += member
     }
 
-    infix fun lend(loanRequest: Pair<String, Member>) =
-        loanRequest.first in inventory && loanRequest.second in members
+    infix fun lend(loanRequest: Pair<String, Member>): Boolean {
+        val (book, member) = loanRequest
+        return bookIsAvailable(book) && isLibraryMember(member)
+    }
+
+    private fun bookIsAvailable(book: String) = book in inventory
+
+    private fun isLibraryMember(member: Member) = member in members
 }
 
 fun main() {

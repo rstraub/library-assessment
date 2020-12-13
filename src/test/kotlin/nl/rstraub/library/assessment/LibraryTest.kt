@@ -1,6 +1,7 @@
 package nl.rstraub.library.assessment
 
 import io.kotest.core.spec.style.WordSpec
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldContainDuplicates
@@ -92,8 +93,10 @@ internal class LibraryTest : WordSpec({
             library lend (book to Member("gorge")) shouldBe false
         }
 
-        "should return true and add book to the member given valid load request" {
+        "should return true and add book to the member given valid loan request" {
+            member.loanedBooks.shouldBeEmpty()
             library lend (book to member) shouldBe true
+//            member.loanedBooks shouldContain book
         }
     }
 })
