@@ -17,9 +17,8 @@ class Library(vararg books: String) {
         currentMembers += member
     }
 
-    infix fun lend(loanRequest: Pair<String, Member>): Boolean {
-        val request = LoanRequest(loanRequest.first, loanRequest.second)
-        return loanIsAllowed(request)
+    infix fun lend(loanRequest: LoanRequest): Boolean {
+        return loanIsAllowed(loanRequest)
     }
 
     private fun loanIsAllowed(loanRequest: LoanRequest) =
