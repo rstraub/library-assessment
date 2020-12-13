@@ -1,6 +1,5 @@
 package nl.rstraub.library.assessment
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldContainAll
@@ -85,8 +84,8 @@ internal class LibraryTest : WordSpec({
             library lend ("404" to member) shouldBe false
         }
 
-        "should throw an exception if the member is not a member of the library" {
-
+        "should return false if the member is not a member of the library" {
+            library lend ("1984" to Member("gorge")) shouldBe false
         }
 
         "should return true and add book to the member given valid load request" {
