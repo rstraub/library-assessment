@@ -19,6 +19,7 @@ class Library(vararg books: String) {
 
     infix fun lend(loanRequest: LoanRequest): Boolean {
         return loanIsAllowed(loanRequest)
+            .also { currentInventory -= loanRequest.book }
     }
 
     private fun loanIsAllowed(loanRequest: LoanRequest) =

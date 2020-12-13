@@ -6,6 +6,7 @@ import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldContainDuplicates
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.collections.shouldNotContainDuplicates
 import io.kotest.matchers.shouldBe
 
@@ -93,10 +94,14 @@ internal class LibraryTest : WordSpec({
             library lend (book to Member("gorge")) shouldBe false
         }
 
-        "should return true and add book to the member given valid loan request" {
-            member.loanedBooks.shouldBeEmpty()
+        "should return true given valid loan request" {
             library lend (book to member) shouldBe true
-//            member.loanedBooks shouldContain book
+        }
+
+        "should remove the book from the library given valid load request" {
+            library.inventory shouldContain book
+            library lend (book to member)
+            library.inventory shouldNotContain book
         }
     }
 })
