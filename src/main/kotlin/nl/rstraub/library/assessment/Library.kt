@@ -2,19 +2,18 @@ package nl.rstraub.library.assessment
 
 class Library(vararg books: String) {
     private val inventory = books.toMutableList()
+    private val members = mutableSetOf<Member>()
 
     fun inventory() = inventory.toList()
 
-    private val currentMembers = mutableSetOf<Member>()
-    val members
-        get() = currentMembers.toSet()
+    fun members() = members.toSet()
 
     infix fun add(book: String) {
         inventory += book
     }
 
     infix fun add(member: Member) {
-        currentMembers += member
+        members += member
     }
 
     fun lend(book: String, member: Member): Boolean {

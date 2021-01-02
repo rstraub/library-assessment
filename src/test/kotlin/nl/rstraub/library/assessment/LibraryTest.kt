@@ -55,7 +55,7 @@ internal class LibraryTest : WordSpec({
             val member = Member("homer")
 
             library add member
-            val result = library.members
+            val result = library.members()
 
             result shouldHaveSize 1
             result shouldContain member
@@ -67,7 +67,7 @@ internal class LibraryTest : WordSpec({
 
             library add member
             library add member
-            val result = library.members
+            val result = library.members()
 
             result shouldContain member
             result.shouldNotContainDuplicates()
