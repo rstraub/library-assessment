@@ -88,6 +88,7 @@ internal class LibraryTest : WordSpec({
 
         "should return false if the book is not in the library" {
             library.lend("404", member) shouldBe false
+            member.loanedBooks.shouldBeEmpty()
         }
 
         "should return false if the member is not a member of the library" {
@@ -114,5 +115,9 @@ internal class LibraryTest : WordSpec({
             library.lend(book, member)
             member.loanedBooks shouldContain book
         }
+    }
+
+    "return" should {
+
     }
 })
