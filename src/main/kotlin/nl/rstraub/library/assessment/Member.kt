@@ -7,6 +7,10 @@ class Member(val name: String) {
         loanedBooks += book
     }
 
+    infix fun remove(book: String) {
+        loanedBooks -= book
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
