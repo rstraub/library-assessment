@@ -7,6 +7,8 @@ class Member(val name: String) {
 
     fun amountOfLoanedBooks() = loanedBooks.size
 
+    fun hasLoaned(book: String) = book in loanedBooks
+
     infix fun add(book: String) {
         loanedBooks += book
     }

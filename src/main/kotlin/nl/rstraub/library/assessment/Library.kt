@@ -32,7 +32,7 @@ class Library(vararg books: String) {
     }
 
     fun returnBook(book: String, member: Member): Boolean {
-        val isBookLoaned = book in member.loanedBooks()
+        val isBookLoaned = member.hasLoaned(book)
 
         if (isBookLoaned) {
             inventory += book
