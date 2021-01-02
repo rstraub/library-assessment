@@ -166,5 +166,11 @@ internal class LibraryTest : WordSpec({
             library remove book shouldBe false
             library.inventory() shouldContain book
         }
+
+        "return false if the book is not property of the library" {
+            val unknownBook = Book("Twilight")
+
+            library remove unknownBook shouldBe false
+        }
     }
 })

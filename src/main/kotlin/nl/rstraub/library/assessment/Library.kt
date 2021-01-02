@@ -36,7 +36,7 @@ class Library(vararg books: Book) {
     private fun isLibraryBook(book: Book) = book in inventory
 
     infix fun remove(book: Book): Boolean {
-        if (book.isLoanedOut) return false
+        if (!isLibraryBook(book) || book.isLoanedOut) return false
 
         inventory -= book
         return true
