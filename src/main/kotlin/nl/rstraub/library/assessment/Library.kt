@@ -1,6 +1,6 @@
 package nl.rstraub.library.assessment
 
-class Library(vararg books: String) {
+class Library(vararg books: Book) {
     companion object {
         private const val MAXIMUM_AMOUNT_OF_LOANS = 7
     }
@@ -12,7 +12,7 @@ class Library(vararg books: String) {
 
     fun members() = members.toSet()
 
-    infix fun add(book: String) {
+    infix fun add(book: Book) {
         inventory += book
     }
 
@@ -20,7 +20,7 @@ class Library(vararg books: String) {
         members += member
     }
 
-    fun lend(book: String, member: Member): Boolean {
+    fun lend(book: Book, member: Member): Boolean {
         val loanIsAllowed = isLoanAllowed(book, member)
 
         if (loanIsAllowed) {
@@ -31,7 +31,7 @@ class Library(vararg books: String) {
         return loanIsAllowed
     }
 
-    fun returnBook(book: String, member: Member): Boolean {
+    fun returnBook(book: Book, member: Member): Boolean {
         val isBookLoaned = member.hasLoaned(book) && isLibraryMember(member)
 
         if (isBookLoaned) {
@@ -42,9 +42,9 @@ class Library(vararg books: String) {
         return isBookLoaned
     }
 
-    private fun isLoanAllowed(book: String, member: Member) = isBookAvailable(book) && isLoanAllowedFor(member)
+    private fun isLoanAllowed(book: Book, member: Member) = isBookAvailable(book) && isLoanAllowedFor(member)
 
-    private fun isBookAvailable(book: String) = book in inventory
+    private fun isBookAvailable(book: Book) = book in inventory
 
     private fun isLoanAllowedFor(member: Member) = isLibraryMember(member) && !hasMaximumAmountOfLoans(member)
 
@@ -52,7 +52,7 @@ class Library(vararg books: String) {
 
     private fun isLibraryMember(member: Member) = member in members
 
-    private infix fun remove(book: String) {
+    private infix fun remove(book: Book) {
         inventory -= book
     }
 }

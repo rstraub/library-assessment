@@ -17,34 +17,38 @@ internal class LibraryTest : WordSpec({
         }
 
         "return all books in the library" {
-            val library = Library("moby dick", "picture of dorian gray")
+            val library = Library(Book("moby dick"), Book("picture of dorian gray"))
 
             val result = library.inventory()
 
-            result shouldContain "moby dick"
-            result shouldContain "picture of dorian gray"
+            result shouldContain Book("moby dick")
+            result shouldContain Book("picture of dorian gray")
         }
     }
 
     "addBook" should {
         "add a book to the inventory" {
-            val library = Library("the iliad")
+            val book = Book("the iliad")
+            val bookToAdd = Book("the odyssey")
 
-            library add "the odyssey"
+            val library = Library(book)
+
+            library add bookToAdd
             val result = library.inventory()
 
             result shouldHaveSize 2
-            result shouldContainAll listOf("the iliad", "the odyssey")
+            result shouldContainAll listOf(book, bookToAdd)
         }
 
         "add duplicate books to the inventory" {
-            val library = Library("the iliad")
+            val book = Book("the iliad")
+            val library = Library(book)
 
-            library add "the iliad"
+            library add book
             val result = library.inventory()
 
             result shouldHaveSize 2
-            result shouldContain "the iliad"
+            result shouldContain book
             result.shouldContainDuplicates()
         }
     }
@@ -76,18 +80,18 @@ internal class LibraryTest : WordSpec({
 
     "lend" should {
         lateinit var member: Member
-        lateinit var book: String
+        lateinit var book: Book
         lateinit var library: Library
 
         beforeEach {
-            book = "1984"
+            book = Book("1984")
             library = Library(book)
             member = Member("george")
             library add member
         }
 
         "return false if the book is not in the library" {
-            library.lend("404", member) shouldBe false
+            library.lend(Book("404"), member) shouldBe false
 
             member.loanedBooks().shouldBeEmpty()
         }
@@ -99,13 +103,13 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the member already has seven loaned books" {
-            member.add("1")
-            member.add("2")
-            member.add("3")
-            member.add("4")
-            member.add("5")
-            member.add("6")
-            member.add("7")
+            member.add(Book("1"))
+            member.add(Book("2"))
+            member.add(Book("3"))
+            member.add(Book("4"))
+            member.add(Book("5"))
+            member.add(Book("6"))
+            member.add(Book("7"))
 
             library.lend(book, member) shouldBe false
 
@@ -123,11 +127,11 @@ internal class LibraryTest : WordSpec({
 
     "returnBook" should {
         lateinit var member: Member
-        lateinit var book: String
+        lateinit var book: Book
         lateinit var library: Library
 
         beforeEach {
-            book = "1984"
+            book = Book("1984")
             library = Library()
             member = Member("george")
             member add book
@@ -142,9 +146,10 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the member does not have the book in his possession" {
-            library.returnBook("404", member) shouldBe false
+            val unknownBook = Book("404")
+            library.returnBook(unknownBook, member) shouldBe false
 
-            library.inventory() shouldNotContain "404"
+            library.inventory() shouldNotContain unknownBook
         }
 
         "return false if the member is not a member of the library" {
