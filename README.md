@@ -16,7 +16,7 @@ Your job is to implement a new library system. We will evaluate your solution in
 - [x] A member can return books in his possession to the library
 - [x] A member is allowed a maximum of seven loaned items at a time
 - [x] A book can only be in the possession of a single member at a time
-- [ ] Books can be removed from the inventory if they are not currently loaned out
+- [x] Books can be removed from the inventory if they are not currently loaned out
 - [ ] The library can always tell where the copy of a book is (in its inventory or at which member)
 
 ## Tips:
