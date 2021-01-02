@@ -9,6 +9,7 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.collections.shouldNotContainDuplicates
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNot
 
 internal class LibraryTest : WordSpec({
     "inventory" should {
@@ -96,6 +97,22 @@ internal class LibraryTest : WordSpec({
 
             result shouldBe false
             library.inventory shouldContain book
+        }
+
+        "return false if the member already has seven loaned books" {
+            member.add("1")
+            member.add("2")
+            member.add("3")
+            member.add("4")
+            member.add("5")
+            member.add("6")
+            member.add("7")
+
+            val result = library.lend(book, member)
+
+            result shouldBe false
+            library.inventory shouldContain book
+            member.loanedBooks shouldNotContain book
         }
 
         "return true given valid loan request" {
