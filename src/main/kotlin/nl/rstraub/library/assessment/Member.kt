@@ -5,6 +5,8 @@ class Member(val name: String) {
 
     fun loanedBooks() = loanedBooks.toList()
 
+    fun amountOfLoanedBooks() = loanedBooks.size
+
     infix fun add(book: String) {
         loanedBooks += book
     }
@@ -25,6 +27,4 @@ class Member(val name: String) {
     }
 
     override fun hashCode() = name.hashCode()
-
-    fun amountOfLoanedBooks() = loanedBooks.size
 }
