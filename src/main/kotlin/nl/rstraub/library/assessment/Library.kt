@@ -23,6 +23,7 @@ class Library(vararg books: Book) {
 
     fun returnBook(book: Book, member: Member): Boolean {
         val isBookLoaned = member.hasLoaned(book) && isLibraryMember(member)
+        if (book !in inventory) return false
 
         if (isBookLoaned) {
             member returnBook book

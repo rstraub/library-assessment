@@ -151,5 +151,12 @@ internal class LibraryTest : WordSpec({
 
             library.returnBook(book, unknownMember) shouldBe false
         }
+
+        "return false if the book is not property of the library" {
+            val unknownBook = Book("Twilight")
+            member loanBook unknownBook
+
+            library.returnBook(unknownBook, member) shouldBe false
+        }
     }
 })
