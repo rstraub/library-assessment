@@ -30,7 +30,7 @@ internal class LibraryTest : WordSpec({
         "add a book to the inventory" {
             val library = Library("the iliad")
 
-            library += "the odyssey"
+            library add "the odyssey"
             val result = library.inventory
 
             result shouldHaveSize 2
@@ -40,7 +40,7 @@ internal class LibraryTest : WordSpec({
         "add duplicate books to the inventory" {
             val library = Library("the iliad")
 
-            library += "the iliad"
+            library add "the iliad"
             val result = library.inventory
 
             result shouldHaveSize 2
@@ -54,7 +54,7 @@ internal class LibraryTest : WordSpec({
             val library = Library()
             val member = Member("homer")
 
-            library += member
+            library add member
             val result = library.members
 
             result shouldHaveSize 1
@@ -65,8 +65,8 @@ internal class LibraryTest : WordSpec({
             val library = Library()
             val member = Member("oscar wilde")
 
-            library += member
-            library += member
+            library add member
+            library add member
             val result = library.members
 
             result shouldContain member
@@ -83,7 +83,7 @@ internal class LibraryTest : WordSpec({
             book = "1984"
             library = Library(book)
             member = Member("george")
-            library += member
+            library add member
         }
 
         "should return false if the book is not in the library" {
