@@ -18,9 +18,7 @@ class Library(vararg books: Book) {
 
     fun lend(book: Book, member: Member): Boolean {
         return if (!isLoanAllowed(book, member)) false
-        else {
-            member loanBook book
-        }
+        else member loanBook book
     }
 
     fun returnBook(book: Book, member: Member): Boolean {
@@ -35,7 +33,7 @@ class Library(vararg books: Book) {
 
     private fun isLoanAllowed(book: Book, member: Member) = isBookAvailable(book) && isLoanAllowedFor(member)
 
-    private fun isBookAvailable(book: Book) = book in inventory
+    private fun isBookAvailable(book: Book) = book in inventory && !book.isLoanedOut
 
     private fun isLoanAllowedFor(member: Member) = isLibraryMember(member)
 

@@ -91,6 +91,12 @@ internal class LibraryTest : WordSpec({
             member.loanedBooks().shouldBeEmpty()
         }
 
+        "return false if the book is already loaned out" {
+            book.isLoanedOut = true
+
+            library.lend(book, member) shouldBe false
+        }
+
         "return false if the member is not a member of the library" {
             library.lend(book, Member("gorge")) shouldBe false
 
