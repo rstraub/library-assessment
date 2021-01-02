@@ -26,5 +26,5 @@ class Member(val name: String) {
 
     override fun hashCode() = name.hashCode()
 
-    fun loanIsAllowed() = loanedBooks.size < 7
+    fun amountOfLoanedBooks() = loanedBooks.size
 }

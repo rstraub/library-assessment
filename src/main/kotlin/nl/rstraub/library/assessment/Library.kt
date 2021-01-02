@@ -34,7 +34,7 @@ class Library(vararg books: String) {
     }
 
     private fun loanIsAllowed(book: String, member: Member) =
-        bookIsAvailable(book) && isLibraryMember(member) && member.loanIsAllowed()
+        bookIsAvailable(book) && isLibraryMember(member) && member.amountOfLoanedBooks() < 7
 
     private fun bookIsAvailable(book: String) = book in inventory
 
