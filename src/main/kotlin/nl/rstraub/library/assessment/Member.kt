@@ -9,11 +9,11 @@ class Member(val name: String) {
 
     fun hasLoaned(book: Book) = book in loanedBooks
 
-    infix fun add(book: Book) {
+    infix fun loanBook(book: Book) {
         loanedBooks += book
     }
 
-    infix fun remove(book: Book) {
+    infix fun returnBook(book: Book) {
         loanedBooks -= book
     }
 

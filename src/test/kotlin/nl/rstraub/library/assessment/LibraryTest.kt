@@ -97,13 +97,13 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the member already has seven loaned books" {
-            member.add(Book("1"))
-            member.add(Book("2"))
-            member.add(Book("3"))
-            member.add(Book("4"))
-            member.add(Book("5"))
-            member.add(Book("6"))
-            member.add(Book("7"))
+            member.loanBook(Book("1"))
+            member.loanBook(Book("2"))
+            member.loanBook(Book("3"))
+            member.loanBook(Book("4"))
+            member.loanBook(Book("5"))
+            member.loanBook(Book("6"))
+            member.loanBook(Book("7"))
 
             library.lend(book, member) shouldBe false
 
@@ -121,7 +121,7 @@ internal class LibraryTest : WordSpec({
 
     "returnBook" should {
         beforeEach {
-            member add book
+            member loanBook book
             library add member
         }
 
@@ -141,7 +141,7 @@ internal class LibraryTest : WordSpec({
 
         "return false if the member is not a member of the library" {
             val unknownMember = Member("john doe")
-            unknownMember.add(book)
+            unknownMember.loanBook(book)
 
             library.returnBook(book, unknownMember) shouldBe false
         }

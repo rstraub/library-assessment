@@ -25,7 +25,7 @@ class Library(vararg books: Book) {
 
         if (loanIsAllowed) {
             remove(book)
-            member add book
+            member loanBook book
         }
 
         return loanIsAllowed
@@ -36,7 +36,7 @@ class Library(vararg books: Book) {
 
         if (isBookLoaned) {
             add(book)
-            member remove book
+            member returnBook book
         }
 
         return isBookLoaned
