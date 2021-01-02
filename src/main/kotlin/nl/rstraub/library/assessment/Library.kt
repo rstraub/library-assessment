@@ -35,7 +35,7 @@ class Library(vararg books: String) {
         val isBookLoaned = member.hasLoaned(book) && isLibraryMember(member)
 
         if (isBookLoaned) {
-            inventory += book
+            add(book)
             member remove book
         }
 
