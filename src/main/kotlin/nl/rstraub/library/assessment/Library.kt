@@ -1,10 +1,6 @@
 package nl.rstraub.library.assessment
 
 class Library(vararg books: Book) {
-    companion object {
-        private const val MAXIMUM_AMOUNT_OF_LOANS = 7
-    }
-
     private val inventory = books.toMutableList()
     private val members = mutableSetOf<Member>()
 
@@ -46,9 +42,7 @@ class Library(vararg books: Book) {
 
     private fun isBookAvailable(book: Book) = book in inventory
 
-    private fun isLoanAllowedFor(member: Member) = isLibraryMember(member) && !hasMaximumAmountOfLoans(member)
-
-    private fun hasMaximumAmountOfLoans(member: Member) = member.amountOfLoanedBooks() == MAXIMUM_AMOUNT_OF_LOANS
+    private fun isLoanAllowedFor(member: Member) = isLibraryMember(member) && member.isAllowedToLoan()
 
     private fun isLibraryMember(member: Member) = member in members
 

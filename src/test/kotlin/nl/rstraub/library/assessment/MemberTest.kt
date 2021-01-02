@@ -30,4 +30,29 @@ class MemberTest : WordSpec({
             book.isLoanedOut shouldBe false
         }
     }
+
+    "isAllowedToLoan" should {
+        "return true if the member has less than seven current loaned books" {
+            member loanBook book
+            member loanBook book
+            member loanBook book
+            member loanBook book
+            member loanBook book
+            member loanBook book
+
+            member.isAllowedToLoan() shouldBe true
+        }
+
+        "return false if the member has seven books currently loaned" {
+            member loanBook book
+            member loanBook book
+            member loanBook book
+            member loanBook book
+            member loanBook book
+            member loanBook book
+            member loanBook book
+
+            member.isAllowedToLoan() shouldBe false
+        }
+    }
 })

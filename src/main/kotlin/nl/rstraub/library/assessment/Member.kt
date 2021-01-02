@@ -1,11 +1,13 @@
 package nl.rstraub.library.assessment
 
 class Member(val name: String) {
+    private companion object {
+        const val MAXIMUM_AMOUNT_OF_LOANED_BOOKS = 7
+    }
+
     private val loanedBooks = mutableListOf<Book>()
 
     fun loanedBooks() = loanedBooks.toList()
-
-    fun amountOfLoanedBooks() = loanedBooks.size
 
     infix fun hasLoaned(book: Book) = book in loanedBooks
 
@@ -18,6 +20,8 @@ class Member(val name: String) {
         loanedBooks -= book
         book.isLoanedOut = false
     }
+
+    fun isAllowedToLoan() = loanedBooks.size < MAXIMUM_AMOUNT_OF_LOANED_BOOKS
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
