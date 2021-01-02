@@ -14,7 +14,7 @@ class MemberTest : WordSpec({
 
     "loanBook" should {
         "add the book to the inventory of the member and set loaned to true on the book" {
-            member loanBook book
+            member loanBook book shouldBe true
 
             member hasLoaned book shouldBe true
             book.isLoanedOut shouldBe true

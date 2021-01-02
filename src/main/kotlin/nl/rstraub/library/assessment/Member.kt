@@ -11,9 +11,10 @@ class Member(val name: String) {
 
     infix fun hasLoaned(book: Book) = book in loanedBooks
 
-    infix fun loanBook(book: Book) {
+    infix fun loanBook(book: Book): Boolean {
         loanedBooks += book
         book.isLoanedOut = true
+        return true
     }
 
     infix fun returnBook(book: Book) {
