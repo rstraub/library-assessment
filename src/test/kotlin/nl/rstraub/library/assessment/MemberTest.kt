@@ -20,4 +20,14 @@ class MemberTest : WordSpec({
             book.isLoanedOut shouldBe true
         }
     }
+
+    "returnBook" should {
+        "remove the book from the member's inventory and set loaned to false on the book" {
+            member loanBook book
+            member returnBook book
+
+            member hasLoaned book shouldBe false
+            book.isLoanedOut shouldBe false
+        }
+    }
 })

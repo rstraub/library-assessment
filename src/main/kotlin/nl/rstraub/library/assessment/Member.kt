@@ -16,6 +16,7 @@ class Member(val name: String) {
 
     infix fun returnBook(book: Book) {
         loanedBooks -= book
+        book.isLoanedOut = false
     }
 
     override fun equals(other: Any?): Boolean {
