@@ -11,27 +11,37 @@ import io.kotest.matchers.collections.shouldNotContainDuplicates
 import io.kotest.matchers.shouldBe
 
 internal class LibraryTest : WordSpec({
+    lateinit var library: Library
+    lateinit var member: Member
+    lateinit var book: Book
+
+    beforeEach {
+        book = Book("1984")
+        member = Member("george")
+        library = Library(book)
+    }
+
     "inventory" should {
         "return empty list given zero books" {
             Library().inventory() shouldBe emptyList()
         }
 
         "return all books in the library" {
-            val library = Library(Book("moby dick"), Book("picture of dorian gray"))
+            library = Library(
+                book,
+                Book("picture of dorian gray")
+            )
 
             val result = library.inventory()
 
-            result shouldContain Book("moby dick")
+            result shouldContain book
             result shouldContain Book("picture of dorian gray")
         }
     }
 
     "addBook" should {
         "add a book to the inventory" {
-            val book = Book("the iliad")
             val bookToAdd = Book("the odyssey")
-
-            val library = Library(book)
 
             library add bookToAdd
             val result = library.inventory()
@@ -41,9 +51,6 @@ internal class LibraryTest : WordSpec({
         }
 
         "add duplicate books to the inventory" {
-            val book = Book("the iliad")
-            val library = Library(book)
-
             library add book
             val result = library.inventory()
 
@@ -55,9 +62,6 @@ internal class LibraryTest : WordSpec({
 
     "addMember" should {
         "add a member to the library" {
-            val library = Library()
-            val member = Member("homer")
-
             library add member
             val result = library.members()
 
@@ -66,9 +70,6 @@ internal class LibraryTest : WordSpec({
         }
 
         "not add a duplicate member to the library" {
-            val library = Library()
-            val member = Member("oscar wilde")
-
             library add member
             library add member
             val result = library.members()
@@ -79,14 +80,7 @@ internal class LibraryTest : WordSpec({
     }
 
     "lend" should {
-        lateinit var member: Member
-        lateinit var book: Book
-        lateinit var library: Library
-
         beforeEach {
-            book = Book("1984")
-            library = Library(book)
-            member = Member("george")
             library add member
         }
 
@@ -126,14 +120,7 @@ internal class LibraryTest : WordSpec({
     }
 
     "returnBook" should {
-        lateinit var member: Member
-        lateinit var book: Book
-        lateinit var library: Library
-
         beforeEach {
-            book = Book("1984")
-            library = Library()
-            member = Member("george")
             member add book
             library add member
         }
