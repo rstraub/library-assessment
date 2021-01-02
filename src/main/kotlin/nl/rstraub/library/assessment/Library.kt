@@ -29,6 +29,7 @@ class Library(vararg books: String) {
     }
 
     fun returnBook(book: String, member: Member): Boolean {
+        currentInventory += book
         return true
     }
 

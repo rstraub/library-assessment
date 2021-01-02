@@ -128,13 +128,16 @@ internal class LibraryTest : WordSpec({
 
         beforeEach {
             book = "1984"
-            library = Library(book)
+            library = Library()
             member = Member("george")
+            member add book
             library add member
         }
 
         "return true if the book was returned to the library and removed from the member" {
             library.returnBook(book, member) shouldBe true
+
+            library.inventory shouldContain book
         }
 
         "return false if the member does not have the book in his possession" {}
