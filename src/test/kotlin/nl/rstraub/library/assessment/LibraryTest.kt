@@ -2,6 +2,7 @@ package nl.rstraub.library.assessment
 
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.collections.*
+import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 
 internal class LibraryTest : WordSpec({
@@ -171,6 +172,18 @@ internal class LibraryTest : WordSpec({
             val unknownBook = Book("Twilight")
 
             library remove unknownBook shouldBe false
+        }
+    }
+
+    "getMemberLoaning" should {
+        "return nothing if the book is in the library inventory" {
+            library.getMemberLoaning(book).shouldBeNull()
+        }
+
+        "return the member currently loaning the book" {
+            library.lend(book, member)
+
+            library.getMemberLoaning(book) shouldBe member
         }
     }
 })
