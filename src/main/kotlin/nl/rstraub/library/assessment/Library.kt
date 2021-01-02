@@ -1,6 +1,10 @@
 package nl.rstraub.library.assessment
 
 class Library(vararg books: String) {
+    companion object {
+        private const val MAXIMUM_AMOUNT_OF_LOANS = 7
+    }
+
     private val inventory = books.toMutableList()
     private val members = mutableSetOf<Member>()
 
