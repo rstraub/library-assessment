@@ -43,7 +43,7 @@ class Library(vararg books: String) {
 
     private fun isLoanAllowedFor(member: Member) = isLibraryMember(member) && !hasMaximumAmountOfLoans(member)
 
-    private fun hasMaximumAmountOfLoans(member: Member) = member.amountOfLoanedBooks() == 7
+    private fun hasMaximumAmountOfLoans(member: Member) = member.amountOfLoanedBooks() == MAXIMUM_AMOUNT_OF_LOANS
 
     private fun isLibraryMember(member: Member) = member in members
 
