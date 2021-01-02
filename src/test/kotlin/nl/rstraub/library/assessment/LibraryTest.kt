@@ -143,6 +143,8 @@ internal class LibraryTest : WordSpec({
 
         "return false if the member does not have the book in his possession" {
             library.returnBook("404", member) shouldBe false
+
+            library.inventory() shouldNotContain "404"
         }
 
         "return false if the member is not a member of the library" {}
