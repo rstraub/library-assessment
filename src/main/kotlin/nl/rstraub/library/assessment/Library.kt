@@ -1,16 +1,14 @@
 package nl.rstraub.library.assessment
 
 class Library(vararg books: String) {
-    private val currentInventory = books.toMutableList()
-    val inventory
-        get() = currentInventory.toList()
+    val inventory = books.toMutableList()
 
     private val currentMembers = mutableSetOf<Member>()
     val members
         get() = currentMembers.toSet()
 
     infix fun add(book: String) {
-        currentInventory += book
+        inventory += book
     }
 
     infix fun add(member: Member) {
@@ -29,7 +27,7 @@ class Library(vararg books: String) {
     }
 
     fun returnBook(book: String, member: Member): Boolean {
-        currentInventory += book
+        inventory += book
         member remove book
         return true
     }
@@ -42,7 +40,7 @@ class Library(vararg books: String) {
     private fun isLibraryMember(member: Member) = member in members
 
     private infix fun remove(book: String) {
-        currentInventory -= book
+        inventory -= book
     }
 }
 
