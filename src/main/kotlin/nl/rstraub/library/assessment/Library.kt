@@ -31,11 +31,9 @@ class Library(vararg books: Book) {
         return isBookLoaned
     }
 
-    private fun isLoanAllowed(book: Book, member: Member) = isBookAvailable(book) && isLoanAllowedFor(member)
+    private fun isLoanAllowed(book: Book, member: Member) = isBookAvailable(book) && isLibraryMember(member)
 
     private fun isBookAvailable(book: Book) = book in inventory && !book.isLoanedOut
-
-    private fun isLoanAllowedFor(member: Member) = isLibraryMember(member)
 
     private fun isLibraryMember(member: Member) = member in members
 
