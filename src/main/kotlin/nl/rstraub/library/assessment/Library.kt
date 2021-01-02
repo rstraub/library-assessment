@@ -32,7 +32,7 @@ class Library(vararg books: String) {
     }
 
     fun returnBook(book: String, member: Member): Boolean {
-        val isBookLoaned = member.hasLoaned(book)
+        val isBookLoaned = member.hasLoaned(book) && isLibraryMember(member)
 
         if (isBookLoaned) {
             inventory += book
@@ -42,9 +42,9 @@ class Library(vararg books: String) {
         return isBookLoaned
     }
 
-    private fun isLoanAllowed(book: String, member: Member) = bookIsAvailable(book) && isLoanAllowedFor(member)
+    private fun isLoanAllowed(book: String, member: Member) = isBookAvailable(book) && isLoanAllowedFor(member)
 
-    private fun bookIsAvailable(book: String) = book in inventory
+    private fun isBookAvailable(book: String) = book in inventory
 
     private fun isLoanAllowedFor(member: Member) = isLibraryMember(member) && !hasMaximumAmountOfLoans(member)
 

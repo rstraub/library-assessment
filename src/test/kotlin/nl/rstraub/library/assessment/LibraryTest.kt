@@ -147,6 +147,11 @@ internal class LibraryTest : WordSpec({
             library.inventory() shouldNotContain "404"
         }
 
-        "return false if the member is not a member of the library" {}
+        "return false if the member is not a member of the library" {
+            val unknownMember = Member("john doe")
+            unknownMember.add(book)
+
+            library.returnBook(book, unknownMember) shouldBe false
+        }
     }
 })
