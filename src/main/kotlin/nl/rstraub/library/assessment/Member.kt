@@ -7,10 +7,11 @@ class Member(val name: String) {
 
     fun amountOfLoanedBooks() = loanedBooks.size
 
-    fun hasLoaned(book: Book) = book in loanedBooks
+    infix fun hasLoaned(book: Book) = book in loanedBooks
 
     infix fun loanBook(book: Book) {
         loanedBooks += book
+        book.isLoanedOut = true
     }
 
     infix fun returnBook(book: Book) {
