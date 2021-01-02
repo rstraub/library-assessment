@@ -1,7 +1,9 @@
 package nl.rstraub.library.assessment
 
 class Member(val name: String) {
-    val loanedBooks = mutableListOf<String>()
+    private val loanedBooks = mutableListOf<String>()
+
+    fun loanedBooks() = loanedBooks.toList()
 
     infix fun add(book: String) {
         loanedBooks += book

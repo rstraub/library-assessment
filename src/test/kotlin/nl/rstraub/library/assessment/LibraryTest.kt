@@ -89,7 +89,7 @@ internal class LibraryTest : WordSpec({
         "return false if the book is not in the library" {
             library.lend("404", member) shouldBe false
 
-            member.loanedBooks.shouldBeEmpty()
+            member.loanedBooks().shouldBeEmpty()
         }
 
         "return false if the member is not a member of the library" {
@@ -110,13 +110,13 @@ internal class LibraryTest : WordSpec({
             library.lend(book, member) shouldBe false
 
             library.inventory shouldContain book
-            member.loanedBooks shouldNotContain book
+            member.loanedBooks() shouldNotContain book
         }
 
         "return true given the book passed from the library to the member" {
             library.lend(book, member) shouldBe true
 
-            member.loanedBooks shouldContain book
+            member.loanedBooks() shouldContain book
             library.inventory shouldNotContain book
         }
     }
@@ -138,7 +138,7 @@ internal class LibraryTest : WordSpec({
             library.returnBook(book, member) shouldBe true
 
             library.inventory shouldContain book
-            member.loanedBooks shouldNotContain book
+            member.loanedBooks() shouldNotContain book
         }
 
         "return false if the member does not have the book in his possession" {}
