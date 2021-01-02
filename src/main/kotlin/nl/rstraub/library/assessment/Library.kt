@@ -17,10 +17,16 @@ class Library(vararg books: String) {
         currentMembers += member
     }
 
-    infix fun lend(loanRequest: LoanRequest) =
-        loanIsAllowed(loanRequest)
-            .also { remove(loanRequest.book) }
-            .also { loanRequest.member += loanRequest.book }
+    infix fun lend(loanRequest: LoanRequest): Boolean {
+        val loanIsAllowed = loanIsAllowed(loanRequest)
+
+        if (loanIsAllowed) {
+            remove(loanRequest.book)
+            loanRequest.member += loanRequest.book
+        }
+
+        return loanIsAllowed
+    }
 
     private fun loanIsAllowed(loanRequest: LoanRequest) =
         bookIsAvailable(loanRequest.book) && isLibraryMember(loanRequest.member)
