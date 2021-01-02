@@ -9,7 +9,6 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.collections.shouldNotContainDuplicates
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNot
 
 internal class LibraryTest : WordSpec({
     "inventory" should {
@@ -89,13 +88,13 @@ internal class LibraryTest : WordSpec({
 
         "return false if the book is not in the library" {
             library.lend("404", member) shouldBe false
+
             member.loanedBooks.shouldBeEmpty()
         }
 
         "return false if the member is not a member of the library" {
-            val result = library.lend(book, Member("gorge"))
+            library.lend(book, Member("gorge")) shouldBe false
 
-            result shouldBe false
             library.inventory shouldContain book
         }
 
@@ -108,19 +107,38 @@ internal class LibraryTest : WordSpec({
             member.add("6")
             member.add("7")
 
-            val result = library.lend(book, member)
+            library.lend(book, member) shouldBe false
 
-            result shouldBe false
             library.inventory shouldContain book
             member.loanedBooks shouldNotContain book
         }
 
         "return true given valid loan request and move the book from the library to the member" {
-            val result = library.lend(book, member)
+            library.lend(book, member) shouldBe true
 
-            result shouldBe true
             member.loanedBooks shouldContain book
             library.inventory shouldNotContain book
         }
+    }
+
+    "returnBook" should {
+        lateinit var member: Member
+        lateinit var book: String
+        lateinit var library: Library
+
+        beforeEach {
+            book = "1984"
+            library = Library(book)
+            member = Member("george")
+            library add member
+        }
+
+        "return true if the book was returned to the library and removed from the member" {
+            library.returnBook(book, member) shouldBe true
+        }
+
+        "return false if the member does not have the book in his possession" {}
+
+        "return false if the member is not a member of the library" {}
     }
 })

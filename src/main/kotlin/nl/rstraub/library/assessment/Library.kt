@@ -28,6 +28,10 @@ class Library(vararg books: String) {
         return loanIsAllowed
     }
 
+    fun returnBook(book: String, member: Member): Boolean {
+        return true
+    }
+
     private fun loanIsAllowed(book: String, member: Member) =
         bookIsAvailable(book) && isLibraryMember(member) && member.loanIsAllowed()
 
