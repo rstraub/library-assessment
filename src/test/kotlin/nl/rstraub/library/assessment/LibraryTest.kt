@@ -87,32 +87,31 @@ internal class LibraryTest : WordSpec({
         }
 
         "should return false if the book is not in the library" {
-            library lend ("404" to member) shouldBe false
+            library.lend("404", member) shouldBe false
         }
 
         "should return false if the member is not a member of the library" {
-            val result = library lend (book to Member("gorge"))
+            val result = library.lend(book, Member("gorge"))
 
             result shouldBe false
             library.inventory shouldContain book
         }
 
         "should return true given valid loan request" {
-            library.inventory
-            val result = library lend (book to member)
+            val result = library.lend(book, member)
 
             result shouldBe true
         }
 
         "should remove the book from the library given valid loan request" {
             library.inventory shouldContain book
-            library lend (book to member)
+            library.lend(book, member)
             library.inventory shouldNotContain book
         }
 
         "should add the book to the member given a valid loan request" {
             member.loanedBooks.shouldBeEmpty()
-            library lend (book to member)
+            library.lend(book, member)
             member.loanedBooks shouldContain book
         }
     }
