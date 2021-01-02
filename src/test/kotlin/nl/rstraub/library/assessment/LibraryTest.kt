@@ -159,5 +159,12 @@ internal class LibraryTest : WordSpec({
             library remove book shouldBe true
             library.inventory() shouldNotContain book
         }
+
+        "return false and leave the book if it is currently loaned out" {
+            book.isLoanedOut = true
+
+            library remove book shouldBe false
+            library.inventory() shouldContain book
+        }
     }
 })
