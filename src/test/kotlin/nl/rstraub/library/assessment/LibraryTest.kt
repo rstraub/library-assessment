@@ -153,4 +153,11 @@ internal class LibraryTest : WordSpec({
             library.returnBook(unknownBook, member) shouldBe false
         }
     }
+
+    "removeBook" should {
+        "return true if the book is available and remove it from the inventory" {
+            library remove book shouldBe true
+            library.inventory() shouldNotContain book
+        }
+    }
 })

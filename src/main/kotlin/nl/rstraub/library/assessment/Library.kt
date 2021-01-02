@@ -35,8 +35,9 @@ class Library(vararg books: Book) {
     private fun isLibraryMember(member: Member) = member in members
     private fun isLibraryBook(book: Book) = book in inventory
 
-    private infix fun remove(book: Book) {
+    infix fun remove(book: Book): Boolean {
         inventory -= book
+        return true
     }
 }
 
