@@ -115,22 +115,12 @@ internal class LibraryTest : WordSpec({
             member.loanedBooks shouldNotContain book
         }
 
-        "return true given valid loan request" {
+        "return true given valid loan request and move the book from the library to the member" {
             val result = library.lend(book, member)
 
             result shouldBe true
-        }
-
-        "remove the book from the library given valid loan request" {
-            library.inventory shouldContain book
-            library.lend(book, member)
-            library.inventory shouldNotContain book
-        }
-
-        "add the book to the member given a valid loan request" {
-            member.loanedBooks.shouldBeEmpty()
-            library.lend(book, member)
             member.loanedBooks shouldContain book
+            library.inventory shouldNotContain book
         }
     }
 })
