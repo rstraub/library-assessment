@@ -113,7 +113,7 @@ internal class LibraryTest : WordSpec({
             member.loanedBooks shouldNotContain book
         }
 
-        "return true given valid loan request and move the book from the library to the member" {
+        "return true given the book passed from the library to the member" {
             library.lend(book, member) shouldBe true
 
             member.loanedBooks shouldContain book
