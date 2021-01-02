@@ -8,6 +8,7 @@ import io.kotest.matchers.collections.shouldContainDuplicates
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.collections.shouldNotContainDuplicates
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 
 internal class LibraryTest : WordSpec({
@@ -107,36 +108,35 @@ internal class LibraryTest : WordSpec({
 
             library.lend(book, member) shouldBe false
 
-            library.inventory() shouldContain book
             member.loanedBooks() shouldNotContain book
+            book.isLoanedOut shouldBe false
         }
 
         "return true given the book passed from the library to the member" {
             library.lend(book, member) shouldBe true
 
             member.loanedBooks() shouldContain book
-            library.inventory() shouldNotContain book
+            book.isLoanedOut shouldBe true
         }
     }
 
     "returnBook" should {
         beforeEach {
-            member loanBook book
             library add member
         }
 
         "return true if the book was returned to the library and removed from the member" {
+            member loanBook book
             library.returnBook(book, member) shouldBe true
 
-            library.inventory() shouldContain book
+            book.isLoanedOut shouldBe false
             member.loanedBooks() shouldNotContain book
         }
 
         "return false if the member does not have the book in his possession" {
-            val unknownBook = Book("404")
-            library.returnBook(unknownBook, member) shouldBe false
+            library.returnBook(book, member) shouldBe false
 
-            library.inventory() shouldNotContain unknownBook
+            book.isLoanedOut shouldBe false
         }
 
         "return false if the member is not a member of the library" {

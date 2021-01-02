@@ -12,8 +12,11 @@ class Member(val name: String) {
     infix fun hasLoaned(book: Book) = book in loanedBooks
 
     infix fun loanBook(book: Book): Boolean {
+        if (!isAllowedToLoan()) return false
+
         loanedBooks += book
         book.isLoanedOut = true
+
         return true
     }
 
@@ -22,7 +25,7 @@ class Member(val name: String) {
         book.isLoanedOut = false
     }
 
-    fun isAllowedToLoan() = loanedBooks.size < MAXIMUM_AMOUNT_OF_LOANED_BOOKS
+    private fun isAllowedToLoan() = loanedBooks.size < MAXIMUM_AMOUNT_OF_LOANED_BOOKS
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
