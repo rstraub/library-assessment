@@ -1,14 +1,7 @@
 package nl.rstraub.library.assessment
 
 import io.kotest.core.spec.style.WordSpec
-import io.kotest.matchers.collections.shouldBeEmpty
-import io.kotest.matchers.collections.shouldContain
-import io.kotest.matchers.collections.shouldContainAll
-import io.kotest.matchers.collections.shouldContainDuplicates
-import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.collections.shouldNotContain
-import io.kotest.matchers.collections.shouldNotContainDuplicates
-import io.kotest.matchers.should
+import io.kotest.matchers.collections.*
 import io.kotest.matchers.shouldBe
 
 internal class LibraryTest : WordSpec({
@@ -133,6 +126,7 @@ internal class LibraryTest : WordSpec({
 
         "return true if the book was returned to the library and removed from the member" {
             member loanBook book
+
             library.returnBook(book, member) shouldBe true
 
             book.isLoanedOut shouldBe false
