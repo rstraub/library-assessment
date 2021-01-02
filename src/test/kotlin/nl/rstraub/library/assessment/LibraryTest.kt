@@ -13,13 +13,13 @@ import io.kotest.matchers.shouldBe
 internal class LibraryTest : WordSpec({
     "inventory" should {
         "return empty list given zero books" {
-            Library().inventory shouldBe emptyList()
+            Library().inventory() shouldBe emptyList()
         }
 
         "return all books in the library" {
             val library = Library("moby dick", "picture of dorian gray")
 
-            val result = library.inventory
+            val result = library.inventory()
 
             result shouldContain "moby dick"
             result shouldContain "picture of dorian gray"
@@ -31,7 +31,7 @@ internal class LibraryTest : WordSpec({
             val library = Library("the iliad")
 
             library add "the odyssey"
-            val result = library.inventory
+            val result = library.inventory()
 
             result shouldHaveSize 2
             result shouldContainAll listOf("the iliad", "the odyssey")
@@ -41,7 +41,7 @@ internal class LibraryTest : WordSpec({
             val library = Library("the iliad")
 
             library add "the iliad"
-            val result = library.inventory
+            val result = library.inventory()
 
             result shouldHaveSize 2
             result shouldContain "the iliad"
@@ -95,7 +95,7 @@ internal class LibraryTest : WordSpec({
         "return false if the member is not a member of the library" {
             library.lend(book, Member("gorge")) shouldBe false
 
-            library.inventory shouldContain book
+            library.inventory() shouldContain book
         }
 
         "return false if the member already has seven loaned books" {
@@ -109,7 +109,7 @@ internal class LibraryTest : WordSpec({
 
             library.lend(book, member) shouldBe false
 
-            library.inventory shouldContain book
+            library.inventory() shouldContain book
             member.loanedBooks() shouldNotContain book
         }
 
@@ -117,7 +117,7 @@ internal class LibraryTest : WordSpec({
             library.lend(book, member) shouldBe true
 
             member.loanedBooks() shouldContain book
-            library.inventory shouldNotContain book
+            library.inventory() shouldNotContain book
         }
     }
 
@@ -137,7 +137,7 @@ internal class LibraryTest : WordSpec({
         "return true if the book was returned to the library and removed from the member" {
             library.returnBook(book, member) shouldBe true
 
-            library.inventory shouldContain book
+            library.inventory() shouldContain book
             member.loanedBooks() shouldNotContain book
         }
 

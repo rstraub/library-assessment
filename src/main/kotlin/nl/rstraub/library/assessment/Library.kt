@@ -1,7 +1,9 @@
 package nl.rstraub.library.assessment
 
 class Library(vararg books: String) {
-    val inventory = books.toMutableList()
+    private val inventory = books.toMutableList()
+
+    fun inventory() = inventory.toList()
 
     private val currentMembers = mutableSetOf<Member>()
     val members
@@ -45,5 +47,5 @@ class Library(vararg books: String) {
 }
 
 fun main() {
-    print(Library().inventory)
+    print(Library().inventory())
 }
