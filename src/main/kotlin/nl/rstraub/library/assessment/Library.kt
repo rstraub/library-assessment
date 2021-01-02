@@ -22,7 +22,7 @@ class Library(vararg books: String) {
 
         if (loanIsAllowed) {
             remove(loanRequest.book)
-            loanRequest.member += loanRequest.book
+            loanRequest.member add loanRequest.book
         }
 
         return loanIsAllowed
