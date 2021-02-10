@@ -26,7 +26,8 @@ class Library(vararg books: Book) {
     }
 
     private fun isLoanAllowed(book: Book, member: Member) = isBookAvailable(book) && isLibraryMember(member)
-    private fun isBookAvailable(book: Book) = isLibraryBook(book) && !book.isLoanedOut
+    private fun isBookAvailable(book: Book) = isLibraryBook(book) && !isBookLoaned(book)
+    private fun isBookLoaned(book: Book) = book.serialCode in loans
 
     fun returnBook(book: Book, member: Member): Boolean {
         return if (!isReturnAllowed(book, member)) false

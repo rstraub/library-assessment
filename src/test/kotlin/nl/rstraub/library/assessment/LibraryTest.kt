@@ -86,7 +86,7 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the book is already loaned out" {
-            book.isLoanedOut = true
+            library.lend(book, member)
 
             library.lend(book, member) shouldBe false
         }
