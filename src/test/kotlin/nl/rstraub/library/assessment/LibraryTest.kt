@@ -126,18 +126,15 @@ internal class LibraryTest : WordSpec({
         }
 
         "return true if the book was returned to the library and removed from the member" {
-            member loanBook book
+            library.lend(book, member)
 
             library.returnBook(book, member) shouldBe true
 
-            book.isLoanedOut shouldBe false
             member.loanedBooks() shouldNotContain book
         }
 
         "return false if the member does not have the book in his possession" {
             library.returnBook(book, member) shouldBe false
-
-            book.isLoanedOut shouldBe false
         }
 
         "return false if the member is not a member of the library" {
