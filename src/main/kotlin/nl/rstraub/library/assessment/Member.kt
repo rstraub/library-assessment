@@ -5,11 +5,11 @@ class Member(override val name: String) : BookOwner {
         const val MAXIMUM_AMOUNT_OF_LOANED_BOOKS = 7
     }
 
-    private val loanedBooks = mutableListOf<Book>()
+    private val loanedBooks = mutableSetOf<Book>()
 
     fun loanedBooks() = loanedBooks.toList()
 
-    infix fun loanBook(book: Book): Boolean {
+    infix fun addLoanedBook(book: Book): Boolean {
         if (!isAllowedToLoan()) return false
 
         loanedBooks += book
@@ -19,7 +19,7 @@ class Member(override val name: String) : BookOwner {
 
     private fun isAllowedToLoan() = loanedBooks.size < MAXIMUM_AMOUNT_OF_LOANED_BOOKS
 
-    infix fun returnBook(book: Book): Boolean {
+    infix fun returnLoanedBook(book: Book): Boolean {
         if (!hasLoaned(book)) return false
 
         loanedBooks -= book

@@ -21,7 +21,7 @@ class Library(override val name: String, vararg books: Book) : BookOwner {
         return if (!isLoanAllowed(book, member)) false
         else {
             loans[book.serialCode] = Loan(book, member)
-            member loanBook book
+            member addLoanedBook book
         }
     }
 
@@ -34,7 +34,7 @@ class Library(override val name: String, vararg books: Book) : BookOwner {
         return if (!isReturnAllowed(book, member)) false
         else {
             loans.remove(book.serialCode)
-            member returnBook book
+            member returnLoanedBook book
         }
     }
 
