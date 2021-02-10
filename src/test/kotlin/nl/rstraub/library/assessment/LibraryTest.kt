@@ -169,6 +169,10 @@ internal class LibraryTest : WordSpec({
     }
 
     "currentOwnerOf" should {
+        beforeEach {
+            library add member
+        }
+
         "return the library if the book is in the library inventory" {
             library currentOwnerOf book shouldBe library
         }
