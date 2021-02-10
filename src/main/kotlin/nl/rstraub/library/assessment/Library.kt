@@ -1,6 +1,6 @@
 package nl.rstraub.library.assessment
 
-class Library(vararg books: Book) {
+class Library(override val name: String, vararg books: Book) : BookOwner {
     private val inventory = books.toMutableSet()
     private val members = mutableSetOf<Member>()
     private val loans = mutableMapOf<String, Loan>()
@@ -53,5 +53,5 @@ class Library(vararg books: Book) {
 }
 
 fun main() {
-    print(Library().inventory())
+    print(Library("Utrecht Centrum").inventory())
 }

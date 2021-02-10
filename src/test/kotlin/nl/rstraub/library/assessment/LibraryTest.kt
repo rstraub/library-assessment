@@ -12,30 +12,24 @@ internal class LibraryTest : WordSpec({
     beforeEach {
         book = Book("1984", "1")
         member = Member("george")
-        library = Library(book)
+        library = Library("Bibliotheek Utrecht Centrum", book)
     }
 
     "inventory" should {
         "return empty list given zero books" {
-            Library().inventory() shouldBe emptyList()
+            Library("Test").inventory() shouldBe emptyList()
         }
 
         "return all books in the library" {
-            library = Library(
-                book,
-                Book("picture of dorian gray", "1")
-            )
-
             val result = library.inventory()
 
             result shouldContain book
-            result shouldContain Book("picture of dorian gray", "1")
         }
     }
 
     "addBook" should {
         "add a book to the inventory" {
-            val bookToAdd = Book("the odyssey", "1")
+            val bookToAdd = Book("the odyssey", "2")
 
             library add bookToAdd
             val result = library.inventory()
@@ -80,7 +74,7 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the book is not in the library" {
-            library.lend(Book("404", "1"), member) shouldBe false
+            library.lend(Book("404", "2"), member) shouldBe false
 
             member.loanedBooks().shouldBeEmpty()
         }
@@ -98,13 +92,13 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the member already has seven loaned books" {
-            member.loanBook(Book("1", "1"))
-            member.loanBook(Book("2", "1"))
-            member.loanBook(Book("3", "1"))
-            member.loanBook(Book("4", "1"))
-            member.loanBook(Book("5", "1"))
-            member.loanBook(Book("6", "1"))
-            member.loanBook(Book("7", "1"))
+            member.loanBook(Book("1", "8"))
+            member.loanBook(Book("2", "2"))
+            member.loanBook(Book("3", "3"))
+            member.loanBook(Book("4", "4"))
+            member.loanBook(Book("5", "5"))
+            member.loanBook(Book("6", "6"))
+            member.loanBook(Book("7", "7"))
 
             library.lend(book, member) shouldBe false
 

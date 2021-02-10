@@ -1,6 +1,6 @@
 package nl.rstraub.library.assessment
 
-class Member(val name: String) {
+class Member(override val name: String) : BookOwner {
     private companion object {
         const val MAXIMUM_AMOUNT_OF_LOANED_BOOKS = 7
     }
