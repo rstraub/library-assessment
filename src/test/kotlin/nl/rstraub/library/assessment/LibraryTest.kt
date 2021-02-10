@@ -109,14 +109,12 @@ internal class LibraryTest : WordSpec({
             library.lend(book, member) shouldBe false
 
             member.loanedBooks() shouldNotContain book
-            book.isLoanedOut shouldBe false
         }
 
         "return true given the book passed from the library to the member" {
             library.lend(book, member) shouldBe true
 
             member.loanedBooks() shouldContain book
-            book.isLoanedOut shouldBe true
         }
     }
 
@@ -153,13 +151,17 @@ internal class LibraryTest : WordSpec({
     }
 
     "removeBook" should {
+        beforeEach {
+            library add member
+        }
+
         "return true if the book is available and remove it from the inventory" {
             library remove book shouldBe true
             library.inventory() shouldNotContain book
         }
 
         "return false and leave the book if it is currently loaned out" {
-            book.isLoanedOut = true
+            library.lend(book, member) shouldBe true
 
             library remove book shouldBe false
             library.inventory() shouldContain book

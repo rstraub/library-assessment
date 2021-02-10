@@ -13,7 +13,6 @@ class Member(val name: String) {
         if (!isAllowedToLoan()) return false
 
         loanedBooks += book
-        book.isLoanedOut = true
 
         return true
     }
@@ -24,7 +23,6 @@ class Member(val name: String) {
         if (!hasLoaned(book)) return false
 
         loanedBooks -= book
-        book.isLoanedOut = false
 
         return true
     }
