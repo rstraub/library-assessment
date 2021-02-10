@@ -50,6 +50,10 @@ class Library(override val name: String, vararg books: Book) : BookOwner {
         inventory -= book
         return true
     }
+
+    infix fun currentOwnerOf(book: Book): BookOwner {
+        return this
+    }
 }
 
 fun main() {
