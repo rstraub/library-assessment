@@ -45,12 +45,13 @@ internal class LibraryTest : WordSpec({
         }
 
         "add duplicate books to the inventory" {
-            library add book
+            val otherCopy = book.copy(serialCode = "2")
+            library add otherCopy
             val result = library.inventory()
 
             result shouldHaveSize 2
             result shouldContain book
-            result.shouldContainDuplicates()
+            result shouldContain otherCopy
         }
     }
 

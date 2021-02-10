@@ -1,8 +1,9 @@
 package nl.rstraub.library.assessment
 
 class Library(vararg books: Book) {
-    private val inventory = books.toMutableList()
+    private val inventory = books.toMutableSet()
     private val members = mutableSetOf<Member>()
+    private val loans = mutableMapOf<String, Loan>()
 
     fun inventory() = inventory.toList()
 
@@ -18,7 +19,10 @@ class Library(vararg books: Book) {
 
     fun lend(book: Book, member: Member): Boolean {
         return if (!isLoanAllowed(book, member)) false
-        else member loanBook book
+        else {
+            loans[book.serialCode] = Loan(book, member)
+            member loanBook book
+        }
     }
 
     private fun isLoanAllowed(book: Book, member: Member) = isBookAvailable(book) && isLibraryMember(member)
@@ -26,7 +30,10 @@ class Library(vararg books: Book) {
 
     fun returnBook(book: Book, member: Member): Boolean {
         return if (!isReturnAllowed(book, member)) false
-        else member returnBook book
+        else {
+            loans.remove(book.serialCode)
+            member returnBook book
+        }
     }
 
     private fun isReturnAllowed(book: Book, member: Member) =
