@@ -2,7 +2,6 @@ package nl.rstraub.library.assessment
 
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.collections.*
-import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 
 internal class LibraryTest : WordSpec({
@@ -11,7 +10,7 @@ internal class LibraryTest : WordSpec({
     lateinit var book: Book
 
     beforeEach {
-        book = Book("1984")
+        book = Book("1984", "1")
         member = Member("george")
         library = Library(book)
     }
@@ -24,19 +23,19 @@ internal class LibraryTest : WordSpec({
         "return all books in the library" {
             library = Library(
                 book,
-                Book("picture of dorian gray")
+                Book("picture of dorian gray", "1")
             )
 
             val result = library.inventory()
 
             result shouldContain book
-            result shouldContain Book("picture of dorian gray")
+            result shouldContain Book("picture of dorian gray", "1")
         }
     }
 
     "addBook" should {
         "add a book to the inventory" {
-            val bookToAdd = Book("the odyssey")
+            val bookToAdd = Book("the odyssey", "1")
 
             library add bookToAdd
             val result = library.inventory()
@@ -80,7 +79,7 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the book is not in the library" {
-            library.lend(Book("404"), member) shouldBe false
+            library.lend(Book("404", "1"), member) shouldBe false
 
             member.loanedBooks().shouldBeEmpty()
         }
@@ -98,13 +97,13 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the member already has seven loaned books" {
-            member.loanBook(Book("1"))
-            member.loanBook(Book("2"))
-            member.loanBook(Book("3"))
-            member.loanBook(Book("4"))
-            member.loanBook(Book("5"))
-            member.loanBook(Book("6"))
-            member.loanBook(Book("7"))
+            member.loanBook(Book("1", "1"))
+            member.loanBook(Book("2", "1"))
+            member.loanBook(Book("3", "1"))
+            member.loanBook(Book("4", "1"))
+            member.loanBook(Book("5", "1"))
+            member.loanBook(Book("6", "1"))
+            member.loanBook(Book("7", "1"))
 
             library.lend(book, member) shouldBe false
 
@@ -148,7 +147,7 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the book is not property of the library" {
-            val unknownBook = Book("Twilight")
+            val unknownBook = Book("Twilight", "1")
             member loanBook unknownBook
 
             library.returnBook(unknownBook, member) shouldBe false
@@ -169,7 +168,7 @@ internal class LibraryTest : WordSpec({
         }
 
         "return false if the book is not property of the library" {
-            val unknownBook = Book("Twilight")
+            val unknownBook = Book("Twilight", "1")
 
             library remove unknownBook shouldBe false
         }
@@ -177,13 +176,10 @@ internal class LibraryTest : WordSpec({
 
     "getMemberLoaning" should {
         "return nothing if the book is in the library inventory" {
-            library.getMemberLoaning(book).shouldBeNull()
         }
 
         "return the member currently loaning the book" {
-            library.lend(book, member)
 
-            library.getMemberLoaning(book) shouldBe member
         }
     }
 })

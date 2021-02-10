@@ -41,8 +41,6 @@ class Library(vararg books: Book) {
         inventory -= book
         return true
     }
-
-    fun getMemberLoaning(book: Book) = book.loanedBy()
 }
 
 fun main() {

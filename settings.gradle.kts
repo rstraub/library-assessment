@@ -1,1 +1,1 @@
-rootProject.name = "library-assessment"
+rootProject.name = "library-kata"
