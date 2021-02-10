@@ -54,6 +54,8 @@ class Library(override val name: String, vararg books: Book) : BookOwner {
     infix fun currentOwnerOf(book: Book): BookOwner {
         return this
     }
+
+    override fun toString() = name
 }
 
 fun main() {

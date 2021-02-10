@@ -168,13 +168,15 @@ internal class LibraryTest : WordSpec({
         }
     }
 
-    "getMemberLoaning" should {
+    "currentOwnerOf" should {
         "return the library if the book is in the library inventory" {
             library currentOwnerOf book shouldBe library
         }
 
         "return the member currently loaning the book" {
+            library.lend(book, member)
 
+            library currentOwnerOf book shouldBe member
         }
     }
 })

@@ -41,4 +41,5 @@ class Member(override val name: String) : BookOwner {
     }
 
     override fun hashCode() = name.hashCode()
+    override fun toString() = name
 }
